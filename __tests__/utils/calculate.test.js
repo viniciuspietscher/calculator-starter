@@ -7,12 +7,6 @@ describe("add operation", () => {
     expect(add(-4, -2)).toBe(-6)
     expect(add(4.5, 2.1)).toBe(6.6)
   })
-  test("don't accept null or empty string as parameter", () => {
-    expect(() => add("", 1)).toThrow("Must provide a number")
-    expect(() => add(null, 1)).toThrow("Must provide a number")
-    expect(() => add(1, null)).toThrow("Must provide a number")
-    expect(() => add(1, "")).toThrow("Must provide a number")
-  })
 })
 
 describe("subtract operation", () => {
@@ -22,12 +16,6 @@ describe("subtract operation", () => {
     expect(subtract(-4, -2)).toBe(-2)
     expect(subtract(4.5, 2.1)).toBe(2.4)
   })
-  test("don't accept null or empty string as parameter", () => {
-    expect(() => subtract("", 1)).toThrow("Must provide a number")
-    expect(() => subtract(null, 1)).toThrow("Must provide a number")
-    expect(() => subtract(1, null)).toThrow("Must provide a number")
-    expect(() => subtract(1, "")).toThrow("Must provide a number")
-  })
 })
 
 describe("multiply operation", () => {
@@ -36,12 +24,6 @@ describe("multiply operation", () => {
     expect(multiply(-4, 2)).toBe(-8)
     expect(multiply(-4, -2)).toBe(8)
     expect(multiply(2.1, 2)).toBe(4.2)
-  })
-  test("don't accept null or empty string as parameter", () => {
-    expect(() => multiply("", 1)).toThrow("Must provide a number")
-    expect(() => multiply(null, 1)).toThrow("Must provide a number")
-    expect(() => multiply(1, null)).toThrow("Must provide a number")
-    expect(() => multiply(1, "")).toThrow("Must provide a number")
   })
 })
 
@@ -56,12 +38,6 @@ describe("divide operation", () => {
     expect(() => {
       divide(2, 0)
     }).toThrow("Can't divide by zero")
-  })
-  test("don't accept null or empty string as parameter", () => {
-    expect(() => divide("", 1)).toThrow("Must provide a number")
-    expect(() => divide(null, 1)).toThrow("Must provide a number")
-    expect(() => divide(1, null)).toThrow("Must provide a number")
-    expect(() => divide(1, "")).toThrow("Must provide a number")
   })
 })
 
@@ -92,4 +68,32 @@ describe("types of input values", () => {
     expect(() => divide("a", "1")).toThrow("Must be a number")
     expect(() => divide("a", 2)).toThrow("Must be a number")
   })
+  test("ADD - don't accept null or empty string as parameter", () => {
+    expect(() => add("", 1)).toThrow("Must provide a number")
+    expect(() => add(null, 1)).toThrow("Must provide a number")
+    expect(() => add(1, null)).toThrow("Must provide a number")
+    expect(() => add(1, "")).toThrow("Must provide a number")
+  })
+  test("SUBTRACT - don't accept null or empty string as parameter", () => {
+    expect(() => subtract("", 1)).toThrow("Must provide a number")
+    expect(() => subtract(null, 1)).toThrow("Must provide a number")
+    expect(() => subtract(1, null)).toThrow("Must provide a number")
+    expect(() => subtract(1, "")).toThrow("Must provide a number")
+  })
+  test("MULTIPLY - don't accept null or empty string as parameter", () => {
+    expect(() => multiply("", 1)).toThrow("Must provide a number")
+    expect(() => multiply(null, 1)).toThrow("Must provide a number")
+    expect(() => multiply(1, null)).toThrow("Must provide a number")
+    expect(() => multiply(1, "")).toThrow("Must provide a number")
+  })
+  test("DIVIDE - don't accept null or empty string as parameter", () => {
+    expect(() => divide("", 1)).toThrow("Must provide a number")
+    expect(() => divide(null, 1)).toThrow("Must provide a number")
+    expect(() => divide(1, null)).toThrow("Must provide a number")
+    expect(() => divide(1, "")).toThrow("Must provide a number")
+  })
 })
+
+// add tests for more than 2 inputs
+// add tests for undefined
+// !!var
