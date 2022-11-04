@@ -1,79 +1,80 @@
-import Grid2 from "@mui/material/Unstable_Grid2";
+import Grid2 from "@mui/material/Unstable_Grid2"
 import {
   Box,
   Paper,
   TextField,
-  InputLabel,
-  MenuItem,
   FormControl,
-  Select,
+  NativeSelect,
   Button,
   Divider,
   Typography,
-} from "@mui/material";
-import axios from "axios";
+} from "@mui/material"
+import { OutlinedInput } from "@mui/material"
+import axios from "axios"
 
-import { useState } from "react";
+import { useState } from "react"
 
 const Calculator = () => {
-  const [operation, setOperation] = useState("");
-  const [result, setResult] = useState("");
+  const [operation, setOperation] = useState("")
+  const [result, setResult] = useState("")
 
   const handleChange = (e) => {
-    setOperation(e.target.value);
-  };
+    setOperation(e.target.value)
+  }
 
   const handleCalculate = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const query = {
       operation: operation,
       first: e.target.first.value,
       second: e.target.second.value,
-    };
+    }
 
     axios
       .get(`/api/calculate/${query.operation}/${query.first}/${query.second}`)
       .then((res) => {
-        setResult(res.data.result);
+        setResult(res.data.result)
       })
       .catch((err) => {
-        setResult(err.response.data.message);
-      });
-  };
+        setResult(err.response.data.message)
+      })
+  }
 
   return (
-    <form onSubmit={handleCalculate}>
+    <form id='calculator-form' onSubmit={handleCalculate}>
       <Grid2 container spacing={1}>
         <Grid2 xs={5}>
           <FormControl fullWidth>
-            <TextField id="first" label="First Number" variant="outlined" />
+            <TextField id='first' label='First Number' variant='outlined' />
           </FormControl>
         </Grid2>
         <Grid2 xs={2}>
           <FormControl fullWidth>
-            <Select
-              id="operation-select"
-              value={operation}
+            <NativeSelect
+              input={<OutlinedInput />}
+              defaultValue={""}
+              inputProps={{
+                name: "operation",
+                id: "operation",
+              }}
               onChange={handleChange}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={"add"}>+</MenuItem>
-              <MenuItem value={"subtract"}>-</MenuItem>
-              <MenuItem value={"multiply"}>*</MenuItem>
-              <MenuItem value={"divide"}>/</MenuItem>
-            </Select>
+              <option value=''>Op</option>
+              <option value={"add"}>+</option>
+              <option value={"subtract"}>-</option>
+              <option value={"multiply"}>*</option>
+              <option value={"divide"}>/</option>
+            </NativeSelect>
           </FormControl>
         </Grid2>
         <Grid2 xs={5}>
           <FormControl fullWidth>
-            <TextField id="second" label="Second Number" variant="outlined" />
+            <TextField id='second' label='Second Number' variant='outlined' />
           </FormControl>
         </Grid2>
         <Grid2 xs={12}>
           <FormControl fullWidth>
-            <Button variant="contained" type="submit">
+            <Button variant='contained' type='submit'>
               Calculate
             </Button>
           </FormControl>
@@ -84,7 +85,7 @@ const Calculator = () => {
         <Grid2 xs={12}>
           <Box>
             <Paper>
-              <Typography align="center" variant="h3" gutterBottom>
+              <Typography align='center' variant='h3' gutterBottom id='result'>
                 {result}
               </Typography>
             </Paper>
@@ -92,7 +93,6 @@ const Calculator = () => {
         </Grid2>
       </Grid2>
     </form>
-  );
-};
-export default Calculator;
-
+  )
+}
+export default Calculator
