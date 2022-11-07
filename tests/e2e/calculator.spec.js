@@ -1,5 +1,9 @@
 import { test, expect } from "@playwright/test"
 
+// test.beforeEach(async ({ page }, testInfo) => {
+//   test.use({ browserName: "firefox" })
+// })
+
 test.describe("Operations values with valid inputs", () => {
   test("Integer Add operation", async ({ page }) => {
     await page.goto("/")
@@ -92,21 +96,21 @@ test.describe("Operations values with valid inputs", () => {
   })
 })
 
-// test("Invalid input error messages:", async ({ page }) => {
-//   const reqObject = {
-//     operation: "add",
-//     first: "a",
-//     second: 3,
-//   }
-//   await page.goto("/")
-//   await page.type("#first", reqObject.first)
-//   await page.type("#second", reqObject.second)
-//   await page.click("#operation")
-//   await page.locator("#operation").selectOption(reqObject.operation)
-//   await page.click('button[type="submit"]')
+test("Invalid input error messages:", async ({ page }) => {
+  const reqObject = {
+    operation: "add",
+    first: "a",
+    second: "3",
+  }
+  await page.goto("/")
+  await page.type("#first", reqObject.first)
+  await page.type("#second", reqObject.second)
+  await page.click("#operation")
+  await page.locator("#operation").selectOption(reqObject.operation)
+  await page.click('button[type="submit"]')
 
-//   const result = page.locator("#result")
-//   await expect(result).toContainText(
-//     `Failed to process query params. Received: ${reqObject.operation} ${reqObject.first} ${reqObject.second}`
-//   )
-// })
+  const result = page.locator("#result")
+  await expect(result).toContainText(
+    `Failed to process query params. Received: ${reqObject.operation},${reqObject.first},${reqObject.second}`
+  )
+})

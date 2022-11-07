@@ -15,7 +15,7 @@ const { devices } = require("@playwright/test")
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
 
 const config = {
-  testDir: "./e2e",
+  testDir: "./tests/",
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -28,11 +28,11 @@ const config = {
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  // forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  // retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  // workers: process.env.CI ? 1 : undefined,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: "html",
@@ -46,6 +46,7 @@ const config = {
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "retry-with-trace",
+    // trace: "on",
   },
 
   /* Run your local dev server before starting the tests */
@@ -53,20 +54,28 @@ const config = {
     command: "npm run dev",
     url: "http://localhost:3000",
     timeout: 120 * 1000,
-    reuseExistingServer: !process.env.CI,
+    // reuseExistingServer: !process.env.CI,
   },
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: "chromium",
-    //   use: {
-    //     ...devices["Desktop Chrome"],
-    //   },
-    // },
-
     {
-      name: "firefox",
+      name: "API - tests",
+      testMatch: /tests\/(api)\/.*(test|spec)\.(js|ts|mjs)/,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+    },
+    {
+      name: "E2E - chromium",
+      testMatch: /tests\/(e2e)\/.*(test|spec)\.(js|ts|mjs)/,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+    },
+    {
+      name: "E2E - firefox",
+      testMatch: /tests\/(e2e)\/.*(test|spec)\.(js|ts|mjs)/,
       use: {
         ...devices["Desktop Firefox"],
       },
