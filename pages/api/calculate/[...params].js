@@ -12,6 +12,7 @@ export default function handler(req, res) {
     let result
     switch (params.operation) {
       case "add":
+        console.log("hey, add called")
         result = add(params.first, params.second)
         break
       case "subtract":
