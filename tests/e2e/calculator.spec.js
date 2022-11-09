@@ -1,9 +1,5 @@
 import { test, expect } from "@playwright/test"
 
-// test.beforeEach(async ({ page }, testInfo) => {
-//   test.use({ browserName: "firefox" })
-// })
-
 test.describe("Operations values with valid inputs", () => {
   test("Integer Add operation", async ({ page }) => {
     await page.goto("/")
@@ -113,4 +109,33 @@ test("Invalid input error messages:", async ({ page }) => {
   await expect(result).toContainText(
     `Failed to process query params. Received: ${reqObject.operation},${reqObject.first},${reqObject.second}`
   )
+})
+
+test("navigate to another page", async ({ page }) => {
+  await page.goto("/")
+  await page.locator("a").click()
+  const result = await page.locator("a")
+  await expect(result).toContainText("Calculator Page")
+})
+
+test.only("navigate to another page and perform an action", async ({
+  page,
+}) => {
+  await page.goto("/")
+  await page.locator("a").click()
+  const title = await page.locator("a")
+  await expect(title).toContainText("Calculator Page")
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  await page.locator("#countButton").click()
+  const text = await page.locator("#hello")
+  await expect(text).toContainText(`Hello World 11`)
 })

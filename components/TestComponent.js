@@ -8,8 +8,8 @@ export default function TestComponent() {
   return (
     <>
       <Link href='/'>Calculator Page</Link>
-      {count > 0 ? <h2>{count}</h2> : ""}
       <button
+        id='countButton'
         onClick={() => {
           setClicked(!clicked)
           setCount(count + 1)
@@ -17,7 +17,7 @@ export default function TestComponent() {
       >
         Click me
       </button>
-      {clicked ? <h2>Hello World</h2> : ""}
+      {clicked ? <h2 id='hello'>Hello World {count}</h2> : ""}
     </>
   )
 }
