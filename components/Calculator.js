@@ -11,7 +11,6 @@ import {
 } from "@mui/material"
 import { OutlinedInput } from "@mui/material"
 import axios from "axios"
-
 import { useState } from "react"
 import Link from "next/link"
 
@@ -32,7 +31,6 @@ const Calculator = () => {
     }
 
     axios
-      // .get(`/api/calculate/test`)
       .get(`/api/calculate/${query.operation}/${query.first}/${query.second}`)
       .then((res) => {
         setResult(res.data.result)
