@@ -118,9 +118,7 @@ test("navigate to another page", async ({ page }) => {
   await expect(result).toContainText("Calculator Page")
 })
 
-test.only("navigate to another page and perform an action", async ({
-  page,
-}) => {
+test("navigate to another page and perform an action", async ({ page }) => {
   await page.goto("/")
   await page.locator("a").click()
   const title = await page.locator("a")
