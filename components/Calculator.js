@@ -32,6 +32,7 @@ const Calculator = () => {
     }
 
     axios
+      // .get(`/api/calculate/test`)
       .get(`/api/calculate/${query.operation}/${query.first}/${query.second}`)
       .then((res) => {
         setResult(res.data.result)
