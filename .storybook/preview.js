@@ -10,9 +10,15 @@ const darkTheme = createTheme({
   },
 })
 
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+})
+
 const withThemeProvider = (Story, context) => {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={lightTheme}>
       <Story {...context} />
     </ThemeProvider>
   )
