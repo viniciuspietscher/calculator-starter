@@ -1,3 +1,4 @@
+import { rest } from "msw"
 import Home from "../../pages/index"
 
 export default {
@@ -6,3 +7,17 @@ export default {
 }
 
 export const HomePage = () => <Home />
+
+HomePage.parameters = {
+  msw: {
+    handlers: [
+      rest.get("/api/calculate/*", (req, res, ctx) => {
+        return res(
+          ctx.json({
+            result: "10",
+          })
+        )
+      }),
+    ],
+  },
+}
