@@ -64,13 +64,10 @@ CalculatorTest.play = async ({ canvasElement }) => {
   })
 }
 
+// Test error message if no params are provided
 NoParamsTest.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
   const form = canvasElement.querySelector("#calculator-form")
-  // await userEvent.type(form.querySelector("#first"), "")
-  // await userEvent.type(form.querySelector("#second"), "")
-  // await userEvent.selectOptions(form.querySelector("#operation"), ["add"])
-
   await userEvent.click(canvas.getByRole("button"))
 
   await waitFor(() => {
