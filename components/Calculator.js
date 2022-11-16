@@ -12,9 +12,15 @@ import {
 import { OutlinedInput } from "@mui/material"
 import axios from "axios"
 import { useState } from "react"
-import Link from "next/link"
+import PropTypes from "prop-types"
+// import Link from "next/link"
 
-const Calculator = () => {
+const Calculator = ({
+  variant = "contained",
+  color = "primary",
+  label = "Calculate",
+  size = "medium",
+}) => {
   const [operation, setOperation] = useState("")
   const [result, setResult] = useState("")
 
@@ -42,12 +48,12 @@ const Calculator = () => {
 
   return (
     <>
-      <Link href='/testPage'>Visit Test Page</Link>
-      <form id='calculator-form' onSubmit={handleCalculate}>
+      {/* <Link href='/testPage'>Visit Test Page</Link> */}
+      <form id="calculator-form" onSubmit={handleCalculate}>
         <Grid2 container spacing={1}>
           <Grid2 xs={5}>
             <FormControl fullWidth>
-              <TextField id='first' label='First Number' variant='outlined' />
+              <TextField id="first" label="First Number" variant="outlined" />
             </FormControl>
           </Grid2>
           <Grid2 xs={2}>
@@ -61,7 +67,7 @@ const Calculator = () => {
                 }}
                 onChange={handleChange}
               >
-                <option value=''>Op</option>
+                <option value="">Op</option>
                 <option value={"add"}>+</option>
                 <option value={"subtract"}>-</option>
                 <option value={"multiply"}>*</option>
@@ -71,13 +77,13 @@ const Calculator = () => {
           </Grid2>
           <Grid2 xs={5}>
             <FormControl fullWidth>
-              <TextField id='second' label='Second Number' variant='outlined' />
+              <TextField id="second" label="Second Number" variant="outlined" />
             </FormControl>
           </Grid2>
           <Grid2 xs={12}>
             <FormControl fullWidth>
-              <Button variant='contained' type='submit'>
-                Calculate
+              <Button variant={variant} color={color} size={size} type="submit">
+                {label}
               </Button>
             </FormControl>
           </Grid2>
@@ -88,10 +94,10 @@ const Calculator = () => {
             <Box>
               <Paper>
                 <Typography
-                  align='center'
-                  variant='h3'
+                  align="center"
+                  variant="h3"
                   gutterBottom
-                  id='result'
+                  id="result"
                 >
                   {result}
                 </Typography>
@@ -103,4 +109,11 @@ const Calculator = () => {
     </>
   )
 }
+
+Calculator.propTypes = {
+  variant: PropTypes.oneOf(["text", "contained", "outlined", "disabled"]),
+  color: PropTypes.oneOf(["primary", "secondary", "success", "error"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+}
+
 export default Calculator

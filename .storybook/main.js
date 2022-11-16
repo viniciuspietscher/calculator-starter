@@ -15,4 +15,7 @@ module.exports = {
     disableTelemetry: true,
   },
   staticDirs: ["../public"],
+  features: {
+    interactionsDebugger: true, // 👈 Enable playback controls
+  },
 }
