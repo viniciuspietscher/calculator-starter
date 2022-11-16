@@ -12,8 +12,11 @@ export default {
     msw: {
       handlers: [
         rest.get("/api/calculate/*", (req, res, ctx) => {
-          if (!req.params) {
-            return res(ctx.status(500, "no params"))
+          if (req.params[0] === "//") {
+            return res(
+              ctx.status(500, "no params"),
+              ctx.json({ message: "no params" })
+            )
           }
 
           const params = req.params[0].split("/")
@@ -72,6 +75,5 @@ NoParamsTest.play = async ({ canvasElement }) => {
 
   await waitFor(() => {
     expect(canvasElement.querySelector("#result").innerText).toBe("no params")
-    // check for response code/message???
   })
 }

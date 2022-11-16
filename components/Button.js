@@ -18,4 +18,5 @@ export default function Button({
 Button.propTypes = {
   variant: PropTypes.oneOf(["text", "contained", "outlined", "disabled"]),
   color: PropTypes.oneOf(["primary", "secondary", "success", "error"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
 }
