@@ -1,8 +1,8 @@
 import { Button as MUIButton } from "@mui/material"
 import PropTypes from "prop-types"
 
-export default function Button({
-  children = "Click me",
+function Button({
+  label = "Click me",
   variant = "contained",
   color = "primary",
   size = "medium",
@@ -10,7 +10,7 @@ export default function Button({
 }) {
   return (
     <MUIButton variant={variant} color={color} size={size} type={type}>
-      {children}
+      {label}
     </MUIButton>
   )
 }
@@ -20,3 +20,5 @@ Button.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "success", "error"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
 }
+
+export default Button

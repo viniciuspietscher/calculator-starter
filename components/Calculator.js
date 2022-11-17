@@ -5,7 +5,7 @@ import {
   TextField,
   FormControl,
   NativeSelect,
-  Button,
+  // Button,
   Divider,
   Typography,
 } from "@mui/material"
@@ -13,6 +13,7 @@ import { OutlinedInput } from "@mui/material"
 import axios from "axios"
 import { useState } from "react"
 import PropTypes from "prop-types"
+import Button from "./Button"
 // import Link from "next/link"
 
 const Calculator = ({
@@ -53,7 +54,12 @@ const Calculator = ({
         <Grid2 container spacing={1}>
           <Grid2 xs={5}>
             <FormControl fullWidth>
-              <TextField id="first" label="First Number" variant="outlined" />
+              <TextField
+                id="first"
+                type="number"
+                label="First Number"
+                variant="outlined"
+              />
             </FormControl>
           </Grid2>
           <Grid2 xs={2}>
@@ -77,14 +83,23 @@ const Calculator = ({
           </Grid2>
           <Grid2 xs={5}>
             <FormControl fullWidth>
-              <TextField id="second" label="Second Number" variant="outlined" />
+              <TextField
+                id="second"
+                type="number"
+                label="Second Number"
+                variant="outlined"
+              />
             </FormControl>
           </Grid2>
           <Grid2 xs={12}>
             <FormControl fullWidth>
-              <Button variant={variant} color={color} size={size} type="submit">
-                {label}
-              </Button>
+              <Button
+                variant={variant}
+                color={color}
+                size={size}
+                label={label}
+                type="submit"
+              />
             </FormControl>
           </Grid2>
           <Grid2 xs={12}>

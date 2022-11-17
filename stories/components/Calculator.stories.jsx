@@ -48,6 +48,8 @@ export const Default = Template.bind({})
 
 export const CalculatorTest = Template.bind({})
 export const NoParamsTest = Template.bind({})
+export const InputOneToBeNumber = Template.bind({})
+export const InputTwoToBeNumber = Template.bind({})
 
 // export const Default = () => <Calculator />
 CalculatorTest.play = async ({ canvasElement }) => {
@@ -73,4 +75,14 @@ NoParamsTest.play = async ({ canvasElement }) => {
   await waitFor(() => {
     expect(canvasElement.querySelector("#result").innerText).toBe("no params")
   })
+}
+
+// Does not allow user to input chars
+InputOneToBeNumber.play = async ({ canvasElement }) => {
+  expect(canvasElement.querySelector("#first").type).toBe("number")
+}
+
+// Does not allow user to input chars
+InputTwoToBeNumber.play = async ({ canvasElement }) => {
+  expect(canvasElement.querySelector("#second").type).toBe("number")
 }

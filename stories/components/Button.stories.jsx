@@ -3,14 +3,25 @@ import Button from "../../components/Button"
 export default {
   title: "Components/Button",
   component: Button,
-  // argTypes: { handleCalculate: { action: "handleCalculate" } },
+  argTypes: {
+    size: { options: ["small", "medium", "large"], control: { type: "radio" } },
+    color: {
+      options: ["primary", "secondary", "success", "error"],
+      control: { type: "radio" },
+    },
+    variant: {
+      options: ["text", "contained", "outlined", "disabled"],
+      control: { type: "radio" },
+    },
+  },
 }
 
 const Template = (args) => <Button {...args} />
 
-export const ButtonComponent = Template.bind({})
-ButtonComponent.args = {
-  label: "Calculate",
+export const Primary = Template.bind({})
+Primary.args = {
+  label: "Click me",
+  variant: "contained",
   size: "medium",
-  color: "secondary",
+  color: "primary",
 }
