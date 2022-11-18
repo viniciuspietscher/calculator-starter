@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import { OutlinedInput } from "@mui/material"
 import axios from "axios"
-import { useState } from "react"
+import { ChangeEvent, FormEvent, useRef, useState } from "react"
 import PropTypes from "prop-types"
 import Button from "./Button"
 // import Link from "next/link"
@@ -24,20 +24,22 @@ const Calculator = ({
 }) => {
   const [operation, setOperation] = useState("")
   const [result, setResult] = useState("")
+  const first = useRef<HTMLInputElement>(null)
+  const second = useRef<HTMLInputElement>(null)
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setOperation(e.target.value)
   }
 
-  const handleCalculate = (e) => {
+  const handleCalculate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const query = {
-      operation: operation,
-      first: e.target.first.value,
-      second: e.target.second.value,
-    }
-
-    axios
+    if (first.current && second.current) {
+       const query = {
+        operation: operation,
+        first: first.current.value,
+        second: second.current.value
+      }
+       axios
       .get(`/api/calculate/${query.operation}/${query.first}/${query.second}`)
       .then((res) => {
         setResult(res.data.result)
@@ -45,6 +47,7 @@ const Calculator = ({
       .catch((err) => {
         setResult(err.response.data.message)
       })
+    }
   }
 
   return (
@@ -56,9 +59,10 @@ const Calculator = ({
             <FormControl fullWidth>
               <TextField
                 id="first"
-                type="number"
+                // type="number"
                 label="First Number"
                 variant="outlined"
+                inputRef={first}
               />
             </FormControl>
           </Grid2>
@@ -85,9 +89,10 @@ const Calculator = ({
             <FormControl fullWidth>
               <TextField
                 id="second"
-                type="number"
+                // type="number"
                 label="Second Number"
                 variant="outlined"
+                inputRef={second}
               />
             </FormControl>
           </Grid2>

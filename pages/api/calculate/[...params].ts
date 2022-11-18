@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from "next"
 import { add, subtract, multiply, divide } from "../../../utils/calculate"
 
-export default function handler(req, res) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method !== "GET") {
       throw new Error(
@@ -8,8 +9,15 @@ export default function handler(req, res) {
       )
     }
 
-    const params = extractParams(req.query.params)
-    let result
+    const queryParams = req.query.params
+
+    if(!Array.isArray(queryParams)) {
+      throw new Error(
+       `Query params should have 3 items. Received ${queryParams}`)
+    }
+
+    const params = extractParams(queryParams)
+    let result: number
     switch (params.operation) {
       case "add":
         result = add(params.first, params.second)
@@ -28,18 +36,31 @@ export default function handler(req, res) {
     }
     res.status(200).json({ result })
   } catch (e) {
-    res.status(500).json({ message: e.message })
+    // https://stackoverflow.com/a/69600711
+    res.status(500).json({ message: (e as Error).message })
+    // if (e instanceof Error) {
+    //   res.status(500).json({ message: e.message })
+    // }
+    // res.status(500).json({ message: e })
   }
 }
 
-function extractParams(queryParams) {
+  interface CalculatorParams {
+    operation: string,
+    first: number,
+    second: number
+  }
+
+
+function extractParams(queryParams: string[]): CalculatorParams {
   if (queryParams.length !== 3) {
     throw new Error(
       `Query params should have 3 items. Received ${queryParams.length}: ${queryParams}`
     )
   }
 
-  const params = {
+
+  const params: CalculatorParams = {
     operation: queryParams[0],
     first: Number(queryParams[1]),
     second: Number(queryParams[2]),
