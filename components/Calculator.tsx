@@ -5,7 +5,6 @@ import {
   TextField,
   FormControl,
   NativeSelect,
-  // Button,
   Divider,
   Typography,
 } from "@mui/material"
@@ -14,7 +13,6 @@ import axios from "axios"
 import { ChangeEvent, FormEvent, useRef, useState } from "react"
 import PropTypes from "prop-types"
 import Button from "./Button"
-// import Link from "next/link"
 
 const Calculator = ({
   variant = "contained",
@@ -47,6 +45,8 @@ const Calculator = ({
       .catch((err) => {
         setResult(err.response.data.message)
       })
+    } else {
+      console.log("something went wrong")
     }
   }
 

@@ -36,12 +36,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
     res.status(200).json({ result })
   } catch (e) {
-    // https://stackoverflow.com/a/69600711
     res.status(500).json({ message: (e as Error).message })
-    // if (e instanceof Error) {
-    //   res.status(500).json({ message: e.message })
-    // }
-    // res.status(500).json({ message: e })
   }
 }
 
